@@ -1,13 +1,13 @@
+<!DOCTYPE html>
 <html>
+  
+  <head>
+    <title>Hola</title>
+    <meta charset="UTF-8">
+  </head>
 
-<head>
-<title>Hello World!</title>
-</head>
-
-<body>
-
-<?php echo "Hellooouuu Worldddddd!"; ?>
-
-
-</body>
+  <body lang="es">
+    <?php echo "Hello World!"; ?>
+  </body>
+  
 </html>
