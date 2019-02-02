@@ -1,20 +1,26 @@
-<?php 
-define('BOT_TOKEN', '671806285:AAG5NL5f7Jvo0ndHJS8xPeqqPHiadI9wja8');
-define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.'/');
-	
-// read incoming info and grab the chatID
+<?php
+
+define("URL", "https://api.telegram.org/bot671806285:AAG5NL5f7Jvo0ndHJS8xPeqqPHiadI9wja8/");
+
+function sendMessage($chatID, $msj) {
+    
+    $url = URL . "sendMessage?chat_id=" . $chatID . "&text=" .urlencode($msj);
+    $ch = curl_init();
+    $optArray = array(
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true
+    );
+    curl_setopt_array($ch, $optArray);
+    $result = curl_exec($ch);
+    curl_close($ch);
+    return $result;
+}
+
+
 $content = file_get_contents("php://input");
 $update = json_decode($content, true);
-$chatID = $update["message"]["chat"]["id"];
-		
-// compose reply
-$reply =  sendMessage();
-		
-// send reply
-$sendto =API_URL."sendmessage?chat_id=".$chatID."&text=".$reply;
-file_get_contents($sendto);
+$chatid = $update["message"]["chat"]["id"];
+$msj = $update["message"]["text"];
+sendMessage($chatid, $msj);
 
-function sendMessage(){
-$message = "I am a baby bot.";
-return $message;
-}
+?>
